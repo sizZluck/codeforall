@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <header>
+    <div class="header__logo">
+      <img src="logovovas.png" alt="Логотип магазина">
+    </div>
+    <div class="header__title">
+      <h1>CODE FOR ALL</h1>
+    </div>
+  </header>
+  <title>code for all</title>
+  <style>
+    
+    .cart.active {
+  display: block;
+}
+    body {
+      background-color: aquamarine;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .containerr {
+      text-align: center;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+  
+
+    .product__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.product__image {
+  width: 30%;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-sizing: border-box; /* Учитывать padding и border в ширине блока */
+}
+
+@media (max-width: 767px) {
+  .product__image {
+    width: 100%; /* На мобильных устройствах товары займут всю ширину */
+  }
+}
+
+    .product__name {
+      font-size: 16px;
+      margin-bottom: 5px;
+      margin-right: 20px;
+    }
+
+    .product__price {
+      font-size: 14px;
+      color: #007bff;
+      margin-right: 20px;
+    }
+
+    .product__button {
+      float: left;
+      margin-left: 200px;
+      cursor: pointer;
+      padding: 10px 20px;
+      background-color:blue;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      
+    }
+
+    .product__button:hover {
+      background-color: #0069d9;
+    }
+
+    .cart {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 300px;
+      height: 100vh;
+      padding: 20px;
+      background-color:antiquewhite;
+      overflow-y: auto;
+      display: none;
+      border-radius: 5px;
+      z-index: 1;
+    }
+
+    .cart__title {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .cart__item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color:whitesmoke;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .cart__item__name {
+      font-size: 16px;
+    }
+
+    .cart__item__price {
+      font-size: 14px;
+      color: #007bff;
+    }
+    header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color:blue;
+  color: white;
+  border-radius: 10px;
+}
+
+.header__logo {
+  width: 100px;
+  height: 100px;
+}
+
+.header__title {
+  margin-right: 100px;
+  font-size: 24px;
+}
+.cart-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  padding: 10px;
+  background-color:darkblue;
+  color: white;
+  border-radius: 5px;
+}
+
+.cart-count {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 2px 5px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+}
+.product-container img {
+  cursor: pointer; /* Установить курсор в виде указателя */
+}
+
+.product-description {
+      display: none;
+      position:relative;
+      justify-content: center;
+      bottom: 300px;
+      left: 60%;
+      
+      transform: translate(-50%, -50%); 
+      width: 500px;
+      height: 200px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+    
+      text-align: center;
+      border-radius: 5px;
+    }
+    #cart {
+      display: none;
+      position: fixed;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    #cart.active {
+      display: block;
+    }
+
+    .cart__item {
+      padding: 10px;
+    }
+
+    .cart__links {
+      padding: 10px;
+      text-align: center;
+    }
+
+    .cart__links a {
+      margin: 0 5px;
+    }
+    .cart__auth-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.auth-link {
+  color: #007bff;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+#registration-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#registration-form form {
+  background-color: #fff;
+  padding: 20px;
+} 
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+}
+
+.overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Позиционирование содержимого по центру */
+  padding: 20px;
+  background-color: #fff; /* Белый фон */
+}
+#overlay2 {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+}
+
+.overlay2-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Позиционирование содержимого по центру */
+  padding: 20px;
+  background-color: #fff; /* Белый фон */
+}
+.description {
+  text-align: center;
+}
+.aboutass {
+    background-color:cornflowerblue;
+}
+
+
+  </style>
+  <div class="aboutass">
+    <h1>About us : </br>At our establishment, you'll discover the most advantageous video tutorials that will assist you in mastering the craft of coding. Owing to our educational offerings, you'll gain the capacity to wield programming languages with assurance, craft applications and web portals, and broaden your professional capabilities. Commence your path toward a triumphant vocation in the realm of Information Technology by embracing our top-notch instructional materials without delay!</h1>
+</div>
+  <div id="overlay">
+    <div class="overlay-content">
+      <form action="login.php" method="post">
+        <label for="username">Username:</label>
+        <input type="text" placeholder="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" placeholder="password" name="password" required>
+        <button type="submit">log in</button>
+      </form>
+      <p>no account? <a href="#" class="auth-link" id="trigger2">register</a></p>
+    </div>
+    <div id="overlay2">
+      <div class="overlay2-content">
+        <form action="register.php" method="post">
+          <label for="username">Username:</label>
+          <input type="text" placeholder="username" name="username" required>
+          <label for="password">Password:</label>
+          <input type="password" placeholder="password" name="password" required></b>
+          <label for="password">Repeatpassword:</label>
+          <input type="repeatpassword" placeholder="repeatpassword" name="repeatpassword" required>
+          <label for="password">E-mail:</label>
+          <input type="email" placeholder="email" name="email" required>
+          <button type="submit">log in</button>
+        </form>
+      </div>
+      
+    
+    <div id="registerForm" style="display: none;">
+      <h2>Регистрация</h2>
+      <form id="registration-form">
+        <label for="username">Имя пользователя:</label>
+        <input type="text" id="username">
+        <label for="password">Пароль:</label>
+        <input type="password" id="password">
+        <input type="submit" value="Зарегистрироваться">
+      </form>
+    </div>
+    </div>
+  </div>
+</head>
+<body>
+  <div class="modal" id="registration-modal">
+    <div class="modal-content">
+ <div class="container">
+  <div class="product-container">
+  
+    <div class="products">
+      <div class="product">
+        <div class="product__image"></div>
+        <a href="#">
+        <img class="product__image" src="second.webp"  data-product-id="1"mouseover="showDescription()" mouseout="hideDescription()">
+      </a>
+        <div class="product__name">Courses Bonuss </br> Coding for Beginners Python Master Decorators From Scratch </br> Learn To Code, </br> Python 2024 Coding Tutorials</div>
+        <div class="product__price">10$</div>
+        <button class="product__button">Into the cart</button>
+        <div class="product-description">
+        </br>
+      </br>
+    </br>
+               What's Included:</br>
+          ✔️3 hours on-demand video</br>
+          ✔️1 article</br>
+          ✔️1 downloadable resource</br>
+        </div>
+      </div>
+      </div>
+      <div class="container">
+        <div class="products">
+          <div class="product">
+            <div class="product__image"></div>
+            <a href="#2">
+            <img class="product__image" src="3th.webp"  data-product-id="2"mouseover="showDescription()" mouseout="hideDescription()">
+          </a>
+            <div class="product__name">Courses Bonuss </br> Learn to Code </br> Coding for Beginners </br> Python Course </br> Programming Courses </br> Advanced Design Pattern</br></div>
+            <div class="product__price">10$</div>
+            <button class="product__button">Into the cart</button>
+            <div class="product-description">
+            </br>
+          </br>
+        </br>
+                    What's Included:</br>
+              ✔️1 hour 24 minutes of on-demand video</br>
+              ✔️1 exercise file</br>
+              ✔️Access on tablet and phone</br></p>
+            </div>
+          </div>
+          </div>
+          <div class="container">
+            <div class="products">
+              <div class="product">
+                <div class="product__image"></div>
+                <a href="#3">
+                <img class="product__image" src="4th.jpg"  data-product-id="3"mouseover="showDescription(this)" mouseout="hideDescription(this)">
+              </a>
+                <div class="product__name">Learn Enough HTML, CSS and Layout </br> Online Course with Coding Tutorials </br> Video Course For Coding </br>
+                </div>
+                <div class="product__price">10$</div>
+                <button class="product__button">Into the cart</button>
+                <div class="product-description">
+                </br>
+              </br>
+            </br>
+                  What's Included:</br>
+                  ✔️14 engaging lessons covering HTML, CSS, and layout techniques</br>
+                  ✔️Step-by-step guidance to create real web pages from start to finish</br>
+                  ✔️Practical exercises to reinforce learning and build hands-on experience</br>
+
+                </div>
+              </div>
+              </div>
+              <div class="container">
+                <div class="products">
+                  <div class="product">
+                    <div class="product__image"></div>
+                    <a href="#3">
+                    <img class="product__image" src="5th.webp"  data-product-id="3"mouseover="showDescription(this)" mouseout="hideDescription(this)">
+                  </a>
+                    <div class="product__name">Courses Bonus </br> Online Coding Classes For Beginners Python </br> Python Advanced Programming Techniques Mysteries </br> Free Courses</br></div>
+                    <div class="product__price">10$</div>
+                    <button class="product__button">Into the cart</button>
+                    <div class="product-description">
+                    </br>
+                  </br>
+                </br>
+                      What's Included:</br>
+                      ✔️172 downloadable resources for offline learning</br>
+                      ✔️Full lifetime access to course materials</br>
+                      ✔️Supplementary articles for deeper insights</br>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="container">
+                    <div class="products">
+                      <div class="product">
+                        <div class="product__image"></div>
+                        <a href="#3">
+                        <img class="product__image" src="6th.webp"  data-product-id="3"mouseover="showDescription(this)" mouseout="hideDescription(this)">
+                      </a>
+                        <div class="product__name">Online Coding Course </br> Programming with Python Libraries and Best Practices -</br> for Beginners in Coding and Intermediate Developers </br> Free </br></div>
+                        <div class="product__price">10$</div>
+                        <button class="product__button">Into the cart</button>
+                        <div class="product-description">
+                        </br>
+                      </br>
+                    </br>
+                          What's Included:</br>
+                          ✔️Access to 2 hours and 19 minutes of comprehensive video lectures</br>
+                          ✔️Hands-on exercises and quizzes for practical learning</br>
+                          ✔️Intermediate skill level suitable for aspiring Python developers</br>
+                        </div>
+                      </div>
+                      </div>
+                      <div class="container">
+                        <div class="products">
+                          <div class="product">
+                            <div class="product__image"></div>
+                            <a href="#3">
+                            <img class="product__image" src="7th.webp"  data-product-id="3"mouseover="showDescription(this)" mouseout="hideDescription(this)">
+                          </a>
+                            <div class="product__name">Coding Video Courses -</br> Master Data Structures & Algorithms in Python </br> Coding for Beginners, ML, BootCamp, Programming Courses </br> Free Videos</br></div>
+                            <div class="product__price">10$</div>
+                            <button class="product__button">Into the cart</button>
+                            <div class="product-description">
+                            </br>
+                          </br>
+                        </br>
+                              What's Included:</br>
+                              ✔️44.5 hours of on-demand video lectures</br>
+                              ✔️101 coding exercises for hands-on practice</br>
+                              ✔️1 practice test to assess your skills</br>
+                              ✔️153 articles for in-depth learning</br>
+                              ✔️122 downloadable resources for reference</br>
+                            </div>
+                          </div>
+                          </div>
+                          <div class="container">
+                            <div class="products">
+                              <div class="product">
+                                <div class="product__image"></div>
+                                <a href="#3">
+                                <img class="product__image" src="8th.avif"  data-product-id="3"mouseover="showDescription(this)" mouseout="hideDescription(this)">
+                              </a>
+                                <div class="product__name">Java Programming Masterclass -</br> From Beginner to Advanced Level -</br> Learn Video Course</br> </div>
+                                <div class="product__price">10$</div>
+                                <button class="product__button">Into the cart</button>
+                                <div class="product-description">
+                                </br>
+                              </br>
+                            </br>
+                                  
+                                  This Video Course Included of:</br>
+✔️350+ Lessons Video Course</br>
+✔️80+ hours Video Course</br>
+✔️Step-By-Step Guide</br>
+                                </div>
+                              </div>
+                              </div>
+                              <div class="container">
+                                <div class="products">
+                                  <div class="product">
+                                    <div class="product__image"></div>
+                                    <a href="#3">
+                                    <img class="product__image" src="9th.avif"  data-product-id="3"mouseover="showDescription(this)" mouseout="hideDescription(this)">
+                                  </a>
+                                    <div class="product__name">Javascript Masterclass From Beginner to Advanced</br> -Learn [Video Course]</br></div>
+                                    <div class="product__price">10$</div>
+                                    <button class="product__button">Into the cart</button>
+                                    <div class="product-description">
+                                    </br>
+                                  </br>
+                                </br>
+                                      What's Included:</br>
+                                      ✔️300+ Lessons Video Course</br>
+✔️69+ hours Video Course</br>
+✔️Step-By-Step Guide</br>
+                                    </div>
+                                  </div>
+                                  </div>
+                                  <div class="container">
+                                    <div class="products">
+                                      <div class="product">
+                                        <div class="product__image"></div>
+                                        <a href="#3">
+                                        <img class="product__image" src="10th.jpg"  data-product-id="3"mouseover="showDescription(this)" mouseout="hideDescription(this)">
+                                      </a>
+                                        <div class="product__name">Complete Android 12<br/> & Kotlin Masterclass<br/> From Beginner to Advance</div>
+                                        <div class="product__price">10$</div>
+                                        <button class="product__button">Into the cart</button>
+                                        <div class="product-description">
+                                        </br>
+                                      </br>
+                                    </br>
+                                          This Video Course Included of:</br>
+✔️280+ Lessons Video Course</br>
+✔️45+ hours Video Course</br>
+✔️Step-By-Step Guide</br>
+                                        </div>
+                                      </div>
+                                      </div>
+                                      <div class="container">
+                                        <div class="products">
+                                          <div class="product">
+                                            <div class="product__image"></div>
+                                            <a href="#3">
+                                            <img class="product__image" src="11th.avif"  data-product-id="3"mouseover="showDescription(this)" mouseout="hideDescription(this)">
+                                          </a>
+                                            <div class="product__name">Course video Computer<br/>
+                                              Programming Learning Materiale<br/>
+                                               for Beginners<br/></div>
+                                            <div class="product__price">10$</div>
+                                            <button class="product__button">Into the cart</button>
+                                            <div class="product-description">
+                                            </br>
+                                          </br>
+                                        </br>
+                                              What's Included:
+                                              ✔️101 programm learning materials</br>
+                                            </div>
+                                          </div>
+                                          </div>
+              <div class="cart" id="cart">
+                <div class="cart__title">Cart</div>
+                <div class="cart__items">
+                  <div class="cart__auth-menu">
+                    <a href="#" class="auth-link" id="trigger">Log in</a>
+                    
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="cart-button" class="cart-button">
+                <span class="cart-count">0 courses in the cart</span>
+              </div>
+              <div id="registration-form" style="display: none;">
+                <form action="/registration" method="post">
+                  <input type="text" name="name" placeholder="name">
+                  <input type="email" name="email" placeholder="Email">
+                  <input type="password" name="password" placeholder="password">
+                  <input type="submit" value="register">
+                </form>
+              </div>
+              <footer>
+                <div class="containerr">
+                  <p>&copy; 2024 code for all. All rights reserved.</p>
+                </div>
+              </footer>
+  <script>
+    
+const cartButton = document.getElementById('cart-button');
+const cart = document.getElementById('cart');
+const cartItems = document.querySelector('.cart__items');
+const cartCount = document.querySelector('.cart-count');
+const productImages = document.querySelectorAll('.product-container img');
+
+
+// Добавление обработчика события для закрытия корзины при клике за ее пределами
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#cart') && !e.target.closest('#cart-button')) {
+    cart.classList.remove('active');
+  }
+});
+
+cartButton.addEventListener('click', () => {
+  cart.classList.toggle('active');
+});
+
+productImages.forEach((image) => {
+  image.addEventListener('click', () => {
+    const productId = image.dataset.productId;
+    const productDescription = document.querySelector(`.product-container[data-product-id="${productId}"] .product-description`);
+
+    // Вывод описания продукта во всплывающее окно
+    alert(productDescription.innerText);
+  });
+});
+
+const productButtons = document.querySelectorAll('.product__button');
+productButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const productName = button.parentNode.querySelector('.product__name').innerText;
+    const productPrice = button.parentNode.querySelector('.product__price').innerText;
+
+    const cartItem = document.createElement('div');
+    cartItem.classList.add('cart__item');
+    cartItem.innerHTML = `
+      <div class="cartitemname">${productName}</div>
+      <div class="cartitemprice">${productPrice}</div>
+    `;
+
+    cartItems.appendChild(cartItem);
+
+    // Обновление счетчика товаров в корзине
+    const currentCount = parseInt(cartCount.innerText);
+    cartCount.innerText = currentCount + 1;
+  });
+});
+function showDescription() {
+      const description = document.querySelector('.product-description');
+      description.style.display = 'block';
+    }
+
+    function hideDescription() {
+      const description = document.querySelector('.product-description');
+      description.style.display = 'none';
+    }
+    const productImagess = document.querySelectorAll('.product__image');
+
+productImagess.forEach((image) => {
+  image.addEventListener('mouseover', showDescription);
+  image.addEventListener('mouseout', hideDescription);
+});
+
+function showDescription(event) {
+  const productContainer = event.target.closest('.product');
+  const description = productContainer.querySelector('.product-description');
+  description.style.display = 'block';
+}
+
+function hideDescription(event) {
+  const productContainer = event.target.closest('.product');
+  const description = productContainer.querySelector('.product-description');
+  description.style.display = 'none';
+}
+document.getElementById("trigger").addEventListener("click", function() {
+  document.getElementById("overlay").style.display = "block";
+});
+document.getElementById('overlay').addEventListener('click', function(e) {
+  if (e.target === this) {
+    this.style.display = 'none';
+  }
+});
+document.getElementById("trigger2").addEventListener("click", function() {
+  document.getElementById("overlay2").style.display = "block";
+});
+document.getElementById('overlay2').addEventListener('click', function(e) {
+  if (e.target === this) {
+    this.style.display = 'none';
+  }
+});
+
+  </script>
+
+</body>
+</html>
+
+
+  
